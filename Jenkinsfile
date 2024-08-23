@@ -10,12 +10,12 @@ pipeline {
              }
              stage("build the image from dockerfile") {
                   steps {
-                        sh "docker build -t aquila:$BUILD_TAG ."
+                        sh "docker build -t my-app:$BUILD_TAG ."
                   }
              }
              stage("test the code in docker container") {
                   steps {
-                        sh "docker run -dit --name aquila-cms -p 80:3010 aquila:$BUILD_TAG"
+                        sh "docker run -dit --name aquila-cms -p 80:3010 my-app:$BUILD_TAG"
                   }
              }
 
