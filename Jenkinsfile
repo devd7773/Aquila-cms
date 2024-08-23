@@ -14,7 +14,7 @@ pipeline {
                         sh "docker tag aquila:$BUILD_TAG dev7773/aquila:$BUILD_TAG"
                   }
              }
-             stage("push the docker") {
+             stage("push the image docker-hub") {
                   steps {
                         withCredentials([string(credentialsId: 'docker-hub-cred', variable: 'my_cred')]) {
                                 sh "docker login -u dev7773 -p ${my_cred}"
@@ -24,7 +24,7 @@ pipeline {
              }
              stage("test the code in docker container") {
                   steps {
-                        sh "docker run -dit --name aquila-cms -p 80:3010 dev7773/aquila:latest"
+                        sh "docker run -dit --name aquila-cms -p 80:3010 dev7773/aquila:$BUILD_TAG"
                   }
              }
 
